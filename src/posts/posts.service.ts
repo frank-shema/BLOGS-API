@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Post } from './entities/post.entity';
+import { CreatePostDto } from './dto/create-post.dto';
+import { UpdatePostDto } from './dto/update-post.dto';
 
 @Injectable()
 export class PostsService {
@@ -10,16 +12,25 @@ export class PostsService {
     private postRepository: Repository<Post>,
   ) {}
 
-  async findAll(page: number, limit: number, search?: string) {
-    const query = this.postRepository
-      .createQueryBuilder('post')
-      .skip((page - 1) * limit)
-      .take(limit);
+  async create(createPostDto: CreatePostDto): Promise<Post> {
+    const post = this.postRepository.create(createPostDto);
+    return this.postRepository.save(post);
+  }
 
-    if (search) {
-      query.where('post.title LIKE :search', { search: `%${search}%` });
-    }
+  async findAll(): Promise<Post[]> {
+    return this.postRepository.find();
+  }
 
-    return query.getMany();
+  async findOne(id: number): Promise<Post> {
+    return this.postRepository.findOne({ where: { id } });
+  }
+
+  async update(id: number, updatePostDto: UpdatePostDto): Promise<Post> {
+    await this.postRepository.update(id, updatePostDto);
+    return this.postRepository.findOne({ where: { id } });
+  }
+
+  async remove(id: number): Promise<void> {
+    await this.postRepository.delete(id);
   }
 }
