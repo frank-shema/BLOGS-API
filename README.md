@@ -22,78 +22,233 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+(Due to technical issues, the search service is temporarily unavailable.)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Here’s a comprehensive **README.md** file for your NestJS Blog API project. You can customize it further based on your needs.
 
-## Project setup
+---
 
-```bash
-$ npm install
+# Blog API with NestJS 🚀
+
+This is a **Blog API** built with **NestJS**, featuring user authentication, CRUD operations for posts, categories, and comments, and integration with **PostgreSQL** using **TypeORM**. The API also includes **Swagger documentation** for easy testing and exploration.
+
+---
+
+## Features
+
+- **User Authentication**:
+  - JWT-based authentication.
+  - User registration and login.
+- **CRUD Operations**:
+  - Create, read, update, and delete **posts**.
+  - Create, read, update, and delete **categories**.
+  - Create, read, update, and delete **comments**.
+- **Database Integration**:
+  - **PostgreSQL** with **TypeORM**.
+  - Entities for users, posts, categories, and comments.
+- **API Documentation**:
+  - **Swagger** integration for API exploration.
+- **Pagination, Filtering, and Search**:
+  - Pagination for posts and comments.
+  - Filtering and search functionality.
+
+---
+
+## Technologies Used
+
+- **Backend Framework**: [NestJS](https://nestjs.com/)
+- **Database**: [PostgreSQL](https://www.postgresql.org/)
+- **ORM**: [TypeORM](https://typeorm.io/)
+- **Authentication**: [Passport.js](http://www.passportjs.org/) with JWT
+- **API Documentation**: [Swagger](https://swagger.io/)
+- **Validation**: [class-validator](https://github.com/typestack/class-validator) and [class-transformer](https://github.com/typestack/class-transformer)
+- **Password Hashing**: [bcrypt](https://www.npmjs.com/package/bcrypt)
+
+---
+
+## Prerequisites
+
+Before running the project, ensure you have the following installed:
+
+- [Node.js](https://nodejs.org/) (v16 or higher)
+- [PostgreSQL](https://www.postgresql.org/)
+- [NestJS CLI](https://docs.nestjs.com/cli/overview) (optional but recommended)
+
+---
+
+## Installation
+
+1. **Clone the repository**:
+
+   ```bash
+   git clone https://github.com/your-username/blog-api.git
+   cd blog-api
+   ```
+
+2. **Install dependencies**:
+
+   ```bash
+   npm install
+   ```
+
+3. **Set up the database**:
+
+   - Create a PostgreSQL database (e.g., `blog_api`).
+   - Update the `.env` file with your database credentials:
+     ```env
+     DB_HOST=localhost
+     DB_PORT=5432
+     DB_USERNAME=your_db_username
+     DB_PASSWORD=your_db_password
+     DB_NAME=blog_api
+     JWT_SECRET=your_jwt_secret_key
+     ```
+
+4. **Run migrations** (if needed):
+
+   ```bash
+   npm run typeorm migration:run
+   ```
+
+5. **Start the server**:
+
+   ```bash
+   npm run start:dev
+   ```
+
+6. **Access the API**:
+   - The API will be running at `http://localhost:3000`.
+   - Swagger documentation will be available at `http://localhost:3000/api`.
+
+---
+
+## API Endpoints
+
+### Authentication
+
+- **POST /auth/register**: Register a new user.
+- **POST /auth/login**: Log in and get a JWT token.
+
+### Users
+
+- **GET /users**: Get all users (protected route).
+- **GET /users/:id**: Get a user by ID (protected route).
+
+### Posts
+
+- **POST /posts**: Create a new post (protected route).
+- **GET /posts**: Get all posts (with pagination and search).
+- **GET /posts/:id**: Get a post by ID.
+- **PUT /posts/:id**: Update a post (protected route).
+- **DELETE /posts/:id**: Delete a post (protected route).
+
+### Categories
+
+- **POST /categories**: Create a new category (protected route).
+- **GET /categories**: Get all categories.
+- **GET /categories/:id**: Get a category by ID.
+- **PUT /categories/:id**: Update a category (protected route).
+- **DELETE /categories/:id**: Delete a category (protected route).
+
+### Comments
+
+- **POST /comments**: Create a new comment (protected route).
+- **GET /comments**: Get all comments (with pagination).
+- **GET /comments/:id**: Get a comment by ID.
+- **PUT /comments/:id**: Update a comment (protected route).
+- **DELETE /comments/:id**: Delete a comment (protected route).
+
+---
+
+## Folder Structure
+
+```
+src/
+├── auth/                  # Authentication module
+├── users/                 # Users module
+├── posts/                 # Posts module
+├── categories/            # Categories module
+├── comments/              # Comments module
+├── database/              # Database configuration
+├── app.module.ts          # Root module
+├── main.ts                # Application entry point
 ```
 
-## Compile and run the project
+---
 
-```bash
-# development
-$ npm run start
+## Environment Variables
 
-# watch mode
-$ npm run start:dev
+Create a `.env` file in the root directory with the following variables:
 
-# production mode
-$ npm run start:prod
+```env
+DB_HOST=localhost
+DB_PORT=5432
+DB_USERNAME=your_db_username
+DB_PASSWORD=your_db_password
+DB_NAME=blog_api
+JWT_SECRET=your_jwt_secret_key
 ```
 
-## Run tests
+---
 
-```bash
-# unit tests
-$ npm run test
+## Running the Project
 
-# e2e tests
-$ npm run test:e2e
+- **Development mode**:
 
-# test coverage
-$ npm run test:cov
-```
+  ```bash
+  npm run start:dev
+  ```
 
-## Deployment
+- **Production mode**:
+  ```bash
+  npm run build
+  npm run start:prod
+  ```
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+---
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+## Testing the API
 
-```bash
-$ npm install -g mau
-$ mau deploy
-```
+- Use **Swagger UI** at `http://localhost:3000/api` to explore and test the API.
+- Use tools like **Postman** or **cURL** for manual testing.
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+---
 
-## Resources
+## Contributing
 
-Check out a few resources that may come in handy when working with NestJS:
+Contributions are welcome! Follow these steps:
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/your-feature`).
+3. Commit your changes (`git commit -m 'Add some feature'`).
+4. Push to the branch (`git push origin feature/your-feature`).
+5. Open a pull request.
 
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+---
 
 ## License
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+---
+
+## Acknowledgments
+
+- [NestJS Documentation](https://docs.nestjs.com/)
+- [TypeORM Documentation](https://typeorm.io/)
+- [Passport.js Documentation](http://www.passportjs.org/)
+
+---
+
+## Contact
+
+If you have any questions or suggestions, feel free to reach out:
+
+- **Email**: your-email@example.com
+- **GitHub**: [your-username](https://github.com/your-username)
+
+---
+
+Happy coding! 🚀
+
+---
