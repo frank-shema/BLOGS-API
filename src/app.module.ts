@@ -9,7 +9,6 @@ import { CommentsModule } from './comments/comments.module';
 
 @Module({
   imports: [
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     ConfigModule.forRoot({ isGlobal: true }), // Load environment variables
     DatabaseModule, // Import DatabaseModule
     UsersModule,

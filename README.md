@@ -252,3 +252,32 @@ If you have any questions or suggestions, feel free to reach out:
 Happy coding! 🚀
 
 ---
+
+<!-- some files to install and what they mean -->
+
+## Packages installed some of them used in authentication
+
+Installed Packages Breakdown
+This project uses the following packages to handle authentication, environment configuration, and password security:
+
+1. @nestjs/passport
+   Description: Passport integration for NestJS.
+   Purpose: Provides an easy way to implement authentication strategies in NestJS applications.
+2. passport
+   Description: The Passport authentication middleware.
+   Purpose: A simple, flexible authentication middleware for Node.js, supporting a wide range of strategies for authentication.
+3. passport-local
+   Description: Local strategy for username/password authentication.
+   Purpose: Allows for the use of local authentication, such as verifying username and password in the authentication process.
+4. passport-jwt
+   Description: JWT authentication strategy.
+   Purpose: Provides a strategy for authenticating using JSON Web Tokens (JWTs), commonly used for securing APIs and web applications.
+5. @nestjs/jwt
+   Description: JWT utilities for NestJS.
+   Purpose: Provides utilities for signing, verifying, and decoding JSON Web Tokens (JWTs), essential for token-based authentication in NestJS apps.
+6. @nestjs/config
+   Description: Load environment variables from .env.
+   Purpose: Allows easy loading and access to environment variables, providing a convenient way to manage configuration settings.
+7. bcrypt
+   Description: For hashing passwords securely.
+   Purpose: A library to hash passwords securely, which is essential for user authentication and protecting sensitive information.

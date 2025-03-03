@@ -1,7 +1,9 @@
-import { Injectable } from '@nestjs/common';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Injectable, ConflictException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/users.service';
 import * as bcrypt from 'bcrypt';
+import { CreateUserDto } from '../users/dto/create-user.dto'; // Assuming you have a DTO
 
 @Injectable()
 export class AuthService {
@@ -10,6 +12,7 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
+  // Ensuring proper typing for the email and password arguments
   async validateUser(email: string, pass: string): Promise<any> {
     const user = await this.usersService.findOneByEmail(email);
     if (user && (await bcrypt.compare(pass, user.password))) {
@@ -19,15 +22,24 @@ export class AuthService {
     return null;
   }
 
-  async login(user: any) {
+  // Removed async from login as it's not necessary
+  login(user: any) {
     const payload = { email: user.email, sub: user.id }; // JWT payload
     return {
       access_token: this.jwtService.sign(payload), // Generate JWT
     };
   }
 
-  async register(user: any) {
-    const hashedPassword = await bcrypt.hash(user.password, 10); // Hash password
+  async register(user: CreateUserDto) {
+    // Ensure user is typed
+    // Check if email already exists
+    const existingUser = await this.usersService.findOneByEmail(user.email);
+    if (existingUser) {
+      throw new ConflictException('User already exists');
+    }
+
+    // Hash password before saving
+    const hashedPassword = await bcrypt.hash(user.password, 10);
     return this.usersService.create({ ...user, password: hashedPassword });
   }
 }
