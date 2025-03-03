@@ -1,7 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, Unique } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Post } from '../../posts/entities/post.entity';
+import { Comment } from '../../comments/entities/comment.entity';
 
 @Entity()
-@Unique(['email'])
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
@@ -9,11 +10,15 @@ export class User {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ unique: true })
   email: string;
 
   @Column()
   password: string;
-  comments: any;
-  posts: any;
+
+  @OneToMany(() => Post, (post) => post.author) // One user can have many posts
+  posts: Post[];
+
+  @OneToMany(() => Comment, (comment) => comment.author) // One user can have many comments
+  comments: Comment[];
 }
