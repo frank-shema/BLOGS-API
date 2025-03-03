@@ -22,7 +22,11 @@ export class CommentsService {
   }
 
   async findOne(id: number): Promise<Comment> {
-    return this.commentRepository.findOne({ where: { id } });
+    const comment = await this.commentRepository.findOne({ where: { id } });
+    if (!comment) {
+      throw new Error(`Comment with id ${id} not found`);
+    }
+    return comment;
   }
 
   async update(
@@ -30,7 +34,11 @@ export class CommentsService {
     updateCommentDto: UpdateCommentDto,
   ): Promise<Comment> {
     await this.commentRepository.update(id, updateCommentDto);
-    return this.commentRepository.findOne({ where: { id } });
+    const comment = await this.commentRepository.findOne({ where: { id } });
+    if (!comment) {
+      throw new Error(`Comment with id ${id} not found`);
+    }
+    return comment;
   }
 
   async remove(id: number): Promise<void> {

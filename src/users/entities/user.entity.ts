@@ -14,4 +14,6 @@ export class User {
 
   @Column()
   password: string;
+  comments: any;
+  posts: any;
 }

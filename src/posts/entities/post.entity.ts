@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -26,4 +27,5 @@ export class Post {
   @ManyToMany(() => Category) // Many posts can have many categories
   @JoinTable()
   categories: Category[];
+  comments: any;
 }

@@ -22,12 +22,20 @@ export class PostsService {
   }
 
   async findOne(id: number): Promise<Post> {
-    return this.postRepository.findOne({ where: { id } });
+    const post = await this.postRepository.findOne({ where: { id } });
+    if (!post) {
+      throw new Error(`Post with id ${id} not found`);
+    }
+    return post;
   }
 
   async update(id: number, updatePostDto: UpdatePostDto): Promise<Post> {
     await this.postRepository.update(id, updatePostDto);
-    return this.postRepository.findOne({ where: { id } });
+    const post = await this.postRepository.findOne({ where: { id } });
+    if (!post) {
+      throw new Error(`Post with id ${id} not found`);
+    }
+    return post;
   }
 
   async remove(id: number): Promise<void> {

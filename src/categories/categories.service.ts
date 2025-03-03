@@ -22,7 +22,11 @@ export class CategoriesService {
   }
 
   async findOne(id: number): Promise<Category> {
-    return this.categoryRepository.findOne({ where: { id } });
+    const category = await this.categoryRepository.findOne({ where: { id } });
+    if (!category) {
+      throw new Error(`Category with id ${id} not found`);
+    }
+    return category;
   }
 
   async update(
@@ -30,7 +34,11 @@ export class CategoriesService {
     updateCategoryDto: UpdateCategoryDto,
   ): Promise<Category> {
     await this.categoryRepository.update(id, updateCategoryDto);
-    return this.categoryRepository.findOne({ where: { id } });
+    const category = await this.categoryRepository.findOne({ where: { id } });
+    if (!category) {
+      throw new Error(`Category with id ${id} not found`);
+    }
+    return category;
   }
 
   async remove(id: number): Promise<void> {
