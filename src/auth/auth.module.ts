@@ -16,6 +16,6 @@ import { UsersModule } from '../users/users.module';
     UsersModule, // Import UsersModule to access UsersService
   ],
   providers: [AuthService, JwtStrategy, LocalStrategy],
-  exports: [AuthService], // Export AuthService for use in other modules
+  exports: [AuthService],
 })
 export class AuthModule {}
