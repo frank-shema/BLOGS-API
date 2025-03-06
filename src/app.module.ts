@@ -6,6 +6,10 @@ import { AuthModule } from './auth/auth.module';
 import { PostsModule } from './posts/posts.module';
 import { CategoriesModule } from './categories/categories.module';
 import { CommentsModule } from './comments/comments.module';
+import { CrazyController } from './crazy.controller'; // Adjust path if necessary
+import { MagicController } from './magic.controller'; // Adjust path if necessary
+import { DrawingController } from './draw/drawing.controller';
+import { DrawingService } from './draw/drawing.service';
 
 @Module({
   imports: [
@@ -17,5 +21,7 @@ import { CommentsModule } from './comments/comments.module';
     CategoriesModule,
     CommentsModule,
   ],
+  controllers: [CrazyController, MagicController, DrawingController],
+  providers: [DrawingService],
 })
 export class AppModule {}
