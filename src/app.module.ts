@@ -10,6 +10,8 @@ import { CrazyController } from './crazy.controller'; // Adjust path if necessar
 import { MagicController } from './magic.controller'; // Adjust path if necessary
 import { DrawingController } from './draw/drawing.controller';
 import { DrawingService } from './draw/drawing.service';
+import { ShapeService } from './shape/shape.service';
+import { ShapeController } from './shape/shape.controller';
 
 @Module({
   imports: [
@@ -21,7 +23,7 @@ import { DrawingService } from './draw/drawing.service';
     CategoriesModule,
     CommentsModule,
   ],
-  controllers: [CrazyController, MagicController, DrawingController],
-  providers: [DrawingService],
+  controllers: [CrazyController, MagicController, DrawingController, ShapeController],
+  providers: [DrawingService, ShapeService],
 })
 export class AppModule {}
