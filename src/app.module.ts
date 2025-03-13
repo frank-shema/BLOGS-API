@@ -23,7 +23,12 @@ import { ShapeController } from './shape/shape.controller';
     CategoriesModule,
     CommentsModule,
   ],
-  controllers: [CrazyController, MagicController, DrawingController, ShapeController],
+  controllers: [
+    CrazyController,
+    MagicController,
+    DrawingController,
+    ShapeController,
+  ],
   providers: [DrawingService, ShapeService],
 })
 export class AppModule {}
